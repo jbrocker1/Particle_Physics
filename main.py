@@ -19,6 +19,9 @@ class Particle:
       self.vel += globals.gravity
     self.pos += self.vel
 
+  def apply_force(self, force: Vector):
+    self.vel += force
+
   def draw(self, win: pygame.Surface):
     pygame.draw.circle(win, self.color, self.pos.point(), self.radius)
 
@@ -32,6 +35,11 @@ def main() -> None:
 
   while True:
     win.fill(canvas.color)
+
+    if p.pos.y > canvas.height:
+      print("nigga")
+      p.apply_force((p.vel * Vector(-1, -1)) * Vector(2, 2))
+
     p.update()
     p.draw(win)
 
